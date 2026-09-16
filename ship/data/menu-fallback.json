@@ -1,0 +1,1625 @@
+[
+  {
+    "id": "ce8d68b7-fce7-48dd-8048-d5398a13ecbe",
+    "name": "Edamame bønner",
+    "description": null,
+    "price": 45,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 1,
+    "allergens": [
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "7708d58c-686a-4ef9-837d-af13cd82c4bc",
+    "name": "Edamame bønner med chili",
+    "description": null,
+    "price": 50,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 2,
+    "allergens": [
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "292a64a8-a868-45ea-894c-89180f9ab463",
+    "name": "Tangsalat",
+    "description": null,
+    "price": 55,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 3,
+    "allergens": [
+      "sesam",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "33e040df-c99f-4239-8cc5-5c21349c57c5",
+    "name": "Kimchi",
+    "description": null,
+    "price": 55,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 4,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "cb629474-20d9-4765-bfb1-fdba7ca921b7",
+    "name": "Wasabi bønner",
+    "description": null,
+    "price": 45,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 5,
+    "allergens": [
+      "sennep"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "c834bf62-3eb9-417a-93b0-3fd9e2e2dc01",
+    "name": "Rejechips",
+    "description": null,
+    "price": 39,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 6,
+    "allergens": [
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Friteres. Frituren deles med tempura, så der kan være gluten.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "9ce0e59e-8cc7-464b-9669-ef3d47e820cb",
+    "name": "Søde kartofler",
+    "description": null,
+    "price": 35,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 7,
+    "allergens": [
+      "gluten"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Friteres. Frituren deles med tempura, så der kan være gluten.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "ec65359d-6dea-48ad-8490-52621c9ebafb",
+    "name": "Sushi ris",
+    "description": null,
+    "price": 28,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 8,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "10a5a77c-8f1e-4d77-b379-dbbbbed04ea7",
+    "name": "Vegetar forårsruller (5 stk.)",
+    "description": null,
+    "price": 40,
+    "category": "Forretter",
+    "is_available": false,
+    "sort_order": 9,
+    "allergens": [
+      "gluten"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Friteres. Frituren deles med tempura, så der kan være gluten.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "d2e1683e-8b67-4b49-87c6-a46a18fdda95",
+    "name": "Gyoza (5 stk.)",
+    "description": "Grøntsager og svinekød",
+    "price": 50,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 10,
+    "allergens": [
+      "gluten",
+      "sulfitter"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "1727b1ea-3b20-455d-ad05-c9f43612c9b4",
+    "name": "Ebi fry (5 stk.)",
+    "description": null,
+    "price": 70,
+    "category": "Forretter",
+    "is_available": true,
+    "sort_order": 11,
+    "allergens": [
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Friteres. Frituren deles med tempura, så der kan være gluten.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "6ae41e4a-ce1b-4b8a-a3df-3f2bd2203be1",
+    "name": "Kyllingefilet",
+    "description": null,
+    "price": 33,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 12,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "515bc02b-01b1-469b-a1de-77ea5ecdfc5f",
+    "name": "Oksekød",
+    "description": null,
+    "price": 38,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 13,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "33d30715-ff4b-49c2-a22a-ca0926c4b8e2",
+    "name": "Lam",
+    "description": null,
+    "price": 38,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 14,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "e47cb48d-4fb4-4b3a-9c60-9c4ba1d5c5cd",
+    "name": "Kæmpe tigerreje",
+    "description": null,
+    "price": 35,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 15,
+    "allergens": [
+      "gluten",
+      "krebsdyr",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "3b25ecac-facc-40d9-9f62-16945959eecb",
+    "name": "Laks (spyd)",
+    "description": null,
+    "price": 35,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 16,
+    "allergens": [
+      "fisk",
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "1b7ba256-792a-45f2-823b-fce14b85caf5",
+    "name": "Kylling kødboller",
+    "description": null,
+    "price": 30,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 17,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "b26bbf71-1bf4-4d01-9e14-a783ef09efa8",
+    "name": "Asparges med bacon",
+    "description": null,
+    "price": 35,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 18,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "c2918fa0-d252-4cbe-8327-d0da06b97e7b",
+    "name": "Squash",
+    "description": null,
+    "price": 25,
+    "category": "Sticks",
+    "is_available": true,
+    "sort_order": 19,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": "Glaseres normalt med teriyaki. Sig til, hvis du vil have den uden.",
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "8c09c785-29c2-43e3-a626-ae4277be097d",
+    "name": "Laks Sashimi (6 skiver)",
+    "description": "Serveres med ris",
+    "price": 85,
+    "category": "Sashimi",
+    "is_available": true,
+    "sort_order": 20,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "c09475c9-1a92-4689-8a98-69576d5ec7fb",
+    "name": "Tun Sashimi (6 skiver)",
+    "description": "Serveres med ris",
+    "price": 89,
+    "category": "Sashimi",
+    "is_available": true,
+    "sort_order": 21,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "be2939af-8794-4085-878d-f8d966b87e19",
+    "name": "Sashimi Menu (12 skiver og 5 tigerrejer)",
+    "description": "Serveres med ris",
+    "price": 205,
+    "category": "Sashimi",
+    "is_available": true,
+    "sort_order": 22,
+    "allergens": [
+      "fisk",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "53f7ff69-8888-4028-8bfc-a689def1cde7",
+    "name": "Tempura Rejer Tun Deluxe Roll (8 stk.)",
+    "description": "Tempura rejer, avocado og agurk, toppet med tun og spicy mayo",
+    "price": 125,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 23,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "489abef3-79a0-4b8e-aa6a-f9254145ce61",
+    "name": "Tempura Rejer Grillet Laks Deluxe Roll (8 stk.)",
+    "description": "Tempura rejer, avocado og mango, toppet med grillet laks og spicy mayo",
+    "price": 125,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 24,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "ae9970da-48d4-4309-858b-61b5c42d73aa",
+    "name": "Tempura Rejer Avocado Deluxe Roll (8 stk.)",
+    "description": "Tempura rejer, avocado og agurk, toppet med avocado og teriyaki",
+    "price": 125,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 25,
+    "allergens": [
+      "aeg",
+      "gluten",
+      "krebsdyr",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "ec6e70c1-86c7-40d8-aa58-1c463f9e61d9",
+    "name": "Tempura Rejer Rainbow Deluxe Roll (8 stk.)",
+    "description": "Tempura rejer, avocado og agurk, toppet med laks, tun, rejer, hvidfisk og bønnespirer",
+    "price": 125,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 26,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "6248284f-28bd-450a-a417-8024a2bc3d8c",
+    "name": "Tempura Kylling Deluxe Roll (8 stk.)",
+    "description": "Tempura kylling og agurk, toppet med avocado og spicy mayo",
+    "price": 120,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 27,
+    "allergens": [
+      "aeg",
+      "gluten"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "fc4341b1-7144-4273-b86a-17e9a7b9184c",
+    "name": "Vegetar Deluxe Roll (8 stk.)",
+    "description": "Salat mix, tofu, agurk og avocado, toppet med tangsalat og chili sesamfrø",
+    "price": 115,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 28,
+    "allergens": [
+      "sesam",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "00e40744-aef3-465b-9e67-b9460a2f4421",
+    "name": "Grillet Laks Deluxe Roll (8 stk.)",
+    "description": "Laks, avocado og agurk, toppet med grillet laks og forårsløg",
+    "price": 125,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 29,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "5840be2b-ea33-4539-8c77-b8d4c1fafa22",
+    "name": "Laks Deluxe Roll (8 stk.)",
+    "description": "Laks, avocado og agurk, toppet med laks og forårsløg",
+    "price": 125,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 30,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "04cb7676-1890-4054-951a-c7b65e5af55b",
+    "name": "Laks Avocado Deluxe Roll (8 stk.)",
+    "description": "Laksemousse og tobiko, toppet med forårsløg og avocado",
+    "price": 120,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 31,
+    "allergens": [
+      "fisk",
+      "maelk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "fac4d488-c509-40c9-86d3-ecd62f47b28f",
+    "name": "Rainbow Roll (8 stk.)",
+    "description": "Surimi, avocado og agurk, toppet med laks, rejer og hvidfisk",
+    "price": 120,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 32,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "df41dc30-529b-4ac2-856a-8479bc7b90db",
+    "name": "Tun Avocado Deluxe Roll (8 stk.)",
+    "description": "Tun og tobiko, toppet med tun og forårsløg",
+    "price": 120,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 33,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "37a24f4e-7cd9-47ec-a19f-b809d8873731",
+    "name": "Tempura Surimi Deluxe Roll (8 stk.)",
+    "description": "Tempura surimi, avocado og agurk, toppet med bønnespirer",
+    "price": 120,
+    "category": "Toppet maki",
+    "is_available": true,
+    "sort_order": 34,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "60baed1b-394e-4104-b105-770a29425fc2",
+    "name": "Sesamfrø Ebi Tempura (8 stk.)",
+    "description": "Ebi rejer, avocado, agurk og spicy sauce",
+    "price": 93,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 35,
+    "allergens": [
+      "aeg",
+      "gluten",
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "432b0887-0914-4abc-b8fd-23092a983d79",
+    "name": "San Francisco (8 stk.)",
+    "description": "Laks, avocado, agurk, basilikum og ørredrogn",
+    "price": 90,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 36,
+    "allergens": [
+      "fisk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "3b6f5d17-0b2b-4f46-b6d7-26f6c521921f",
+    "name": "Super California (8 stk.)",
+    "description": "Krebsehaler, avocado, agurk og tobiko",
+    "price": 90,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 37,
+    "allergens": [
+      "fisk",
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "6c5cb03a-04ab-4901-94ef-46aa83a6268b",
+    "name": "Alaska (8 stk.)",
+    "description": "Laks, flødeost, avocado, agurk og tobiko",
+    "price": 90,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 38,
+    "allergens": [
+      "fisk",
+      "maelk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "86b86129-7fe0-408f-a069-22eb5d5a2983",
+    "name": "California (8 stk.)",
+    "description": "Surimi, avocado, agurk og sesamfrø",
+    "price": 80,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 39,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "90170dfb-b750-4d70-b8f2-fa9d999ee6ef",
+    "name": "Spicy Laks (8 stk.)",
+    "description": "Laks, spicy sauce, agurk, avocado og sesamfrø",
+    "price": 83,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 40,
+    "allergens": [
+      "fisk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "83bd1c57-7474-49e8-9b5b-6afde670239e",
+    "name": "Spicy Rejer (8 stk.)",
+    "description": "Tigerrejer, spicy sauce, agurk, avocado og sesamfrø",
+    "price": 85,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 41,
+    "allergens": [
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "a6319989-f02f-4e5b-92bd-db0fc33e2f30",
+    "name": "Spicy Tun (8 stk.)",
+    "description": "Tun, spicy sauce, agurk, avocado og sesamfrø",
+    "price": 85,
+    "category": "Uramaki",
+    "is_available": true,
+    "sort_order": 42,
+    "allergens": [
+      "fisk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "521c0b38-9bb1-4e6d-b658-909ba97c56f9",
+    "name": "Tigerrejer (8 stk.)",
+    "description": null,
+    "price": 53,
+    "category": "Hosomaki",
+    "is_available": true,
+    "sort_order": 43,
+    "allergens": [
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "456c706b-7396-4be9-91d3-f5909fc34de6",
+    "name": "Tun (8 stk.)",
+    "description": null,
+    "price": 50,
+    "category": "Hosomaki",
+    "is_available": true,
+    "sort_order": 44,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "024d5d8d-aab3-4510-91c6-60dfa7414e07",
+    "name": "Laks (8 stk.)",
+    "description": null,
+    "price": 50,
+    "category": "Hosomaki",
+    "is_available": true,
+    "sort_order": 45,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "375dac2a-b4f5-46a0-848e-9e4cbd2188bf",
+    "name": "Agurk (8 stk.)",
+    "description": null,
+    "price": 43,
+    "category": "Hosomaki",
+    "is_available": true,
+    "sort_order": 46,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "c7112b4a-ed0f-40f5-9819-78239faf0537",
+    "name": "Avocado (8 stk.)",
+    "description": null,
+    "price": 43,
+    "category": "Hosomaki",
+    "is_available": true,
+    "sort_order": 47,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "2e50269a-8cd3-4410-b1b1-827c5ef54ee4",
+    "name": "Tun med avocado (8 stk.)",
+    "description": null,
+    "price": 53,
+    "category": "Hosomaki",
+    "is_available": true,
+    "sort_order": 48,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "4e8d8491-40e9-4a45-a735-6788db295ab3",
+    "name": "Laks med avocado (8 stk.)",
+    "description": null,
+    "price": 53,
+    "category": "Hosomaki",
+    "is_available": true,
+    "sort_order": 49,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "d5b30b9e-8935-4522-92f9-4358e08be0e7",
+    "name": "Yami Ebi Rejer (5 stk.)",
+    "description": "Ebi rejer, avocado og mango",
+    "price": 73,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 50,
+    "allergens": [
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "6743c8fd-50e7-440c-abdb-7cd279af719a",
+    "name": "Tempura Rejer (5 stk.)",
+    "description": "Ebi rejer, avocado og agurk",
+    "price": 70,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 51,
+    "allergens": [
+      "aeg",
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "22ffdd44-24a6-4141-897a-3ce3d7b841cc",
+    "name": "Spicy Rejer (5 stk.)",
+    "description": "Tigerrejer, avocado og agurk",
+    "price": 70,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 52,
+    "allergens": [
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "31227183-aadf-49e2-91f8-c2ba8c078b62",
+    "name": "Big Alaska (5 stk.)",
+    "description": "Laks, flødeost, agurk, avocado og tobiko",
+    "price": 70,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 53,
+    "allergens": [
+      "fisk",
+      "maelk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "894659bc-5d4f-4204-a9a5-472a5fc1107c",
+    "name": "California Laks (5 stk.)",
+    "description": "Surimi, laks, avocado og agurk",
+    "price": 73,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 54,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "af9a8ba9-91b2-4b1b-a4ad-67c1a98a3ab2",
+    "name": "Spicy Laks (5 stk.)",
+    "description": "Laks, avocado og agurk",
+    "price": 70,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 55,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "5731b69c-286b-4841-90f1-5fc90a2166da",
+    "name": "Spicy Tun (5 stk.)",
+    "description": "Tun, agurk og avocado",
+    "price": 73,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 56,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "fa736d00-8896-4215-b345-c4d129f9cc10",
+    "name": "California (5 stk.)",
+    "description": "Surimi, avocado og agurk",
+    "price": 65,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 57,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "3e870781-3698-4248-9db4-9c0d3a53eae5",
+    "name": "Vegetar (5 stk.)",
+    "description": "Avocado, agurk, tofu og salat mix",
+    "price": 60,
+    "category": "Futomaki",
+    "is_available": true,
+    "sort_order": 58,
+    "allergens": [
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "5b5e6fdd-c2a3-4f4a-a98b-7d9d2097f431",
+    "name": "Laks",
+    "description": null,
+    "price": 22,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 59,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "5fa41ee7-1a2b-459b-9d21-4a8dcfd6a6e9",
+    "name": "Grillet Laks",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 60,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "7bde68c3-a1c0-4bcc-af01-70f4e53f9387",
+    "name": "Laks med Avocado",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 61,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "fdf9e4a7-ed51-48d8-9b7f-62611abfcda7",
+    "name": "Grillet Laks med Bønnespirer",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 62,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "a21c417e-b0b1-4b81-8e99-be6dda9857bc",
+    "name": "Tun",
+    "description": null,
+    "price": 22,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 63,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "6f00c1f9-94d0-4b63-88ea-d362a145e2f9",
+    "name": "Tun Tataki",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 64,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "1971bd61-fe67-4bdb-a6af-f944643ede9a",
+    "name": "Tun med Avocado",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 65,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "8f59ae40-1d68-4c72-9f17-9e465bfc2ac7",
+    "name": "Tun med Forårsløg",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 66,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "c1af8697-307c-4722-b821-931ffd765ee9",
+    "name": "Hvidfisk",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 67,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "39b0ea97-dfd1-476c-b210-5d85e78e3833",
+    "name": "Tigerrejer",
+    "description": null,
+    "price": 22,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 68,
+    "allergens": [
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "5faf6dd1-a8a3-41f5-ad0c-0c4a435d83bc",
+    "name": "Tigerrejer med Spicy Sauce",
+    "description": null,
+    "price": 24,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 69,
+    "allergens": [
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "4bc16312-e062-49bd-b190-f0b59e295e9f",
+    "name": "Krebsehaler",
+    "description": null,
+    "price": 27,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 70,
+    "allergens": [
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "1bbe3fad-96fd-4e7e-8e2f-81ee5bad1bb4",
+    "name": "Laks Gunkan",
+    "description": null,
+    "price": 27,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 71,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "1f948e96-c649-4f41-80d8-94587a8536aa",
+    "name": "Ørredrogn",
+    "description": null,
+    "price": 27,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 72,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "3ef7a8ef-c725-49a8-961a-86f6303e1bb3",
+    "name": "Avocado",
+    "description": null,
+    "price": 20,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 73,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "c13def05-d967-43f9-88f6-d51e700b3be6",
+    "name": "Agurk",
+    "description": null,
+    "price": 17,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 74,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "915c6e7f-835d-41f5-9fc5-2a9e151b556a",
+    "name": "Inari Tofu",
+    "description": null,
+    "price": 22,
+    "category": "Nigiri",
+    "is_available": true,
+    "sort_order": 75,
+    "allergens": [
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "c7f72957-8603-4a54-b2bf-377cc73e4abf",
+    "name": "Rispapir Laks (8 stk.)",
+    "description": "Laks, salat mix, agurk og avocado med spicy sauce",
+    "price": 85,
+    "category": "Rispapir ruller",
+    "is_available": true,
+    "sort_order": 76,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "8f903885-fe86-4019-adf6-2731d0517da2",
+    "name": "Rispapir Ebi Rejer (8 stk.)",
+    "description": "Ebi rejer, salat mix, agurk og avocado med spicy sauce og teriyaki sauce",
+    "price": 85,
+    "category": "Rispapir ruller",
+    "is_available": true,
+    "sort_order": 77,
+    "allergens": [
+      "gluten",
+      "krebsdyr",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "429c1651-00aa-4a27-a15b-13ebda46de43",
+    "name": "Rispapir Tempura Kylling (8 stk.)",
+    "description": "Tempura kylling, salat mix, agurk og avocado med spicy sauce og goma sauce",
+    "price": 85,
+    "category": "Rispapir ruller",
+    "is_available": true,
+    "sort_order": 78,
+    "allergens": [
+      "aeg",
+      "gluten",
+      "sesam",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "322300af-6b61-4804-955f-fd63675fb1ce",
+    "name": "Rispapir Oksekød (8 stk.)",
+    "description": "Oksekød, salat mix, agurk og avocado med teriyaki sauce",
+    "price": 85,
+    "category": "Rispapir ruller",
+    "is_available": true,
+    "sort_order": 79,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "d6eb140c-6649-4610-ad16-eb2e5c0e65a1",
+    "name": "Goma dressing",
+    "description": null,
+    "price": 15,
+    "category": "Tilbehør",
+    "is_available": true,
+    "sort_order": 80,
+    "allergens": [
+      "sesam",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "063a2893-4b32-4bdb-b1e3-78f48feedf64",
+    "name": "Hjemmelavet wasabi-mayo",
+    "description": null,
+    "price": 10,
+    "category": "Tilbehør",
+    "is_available": true,
+    "sort_order": 81,
+    "allergens": [
+      "aeg",
+      "gluten",
+      "sennep"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "47c7bac0-0066-4e23-83bc-ecd827edf909",
+    "name": "Hjemmelavet chili-mayo",
+    "description": null,
+    "price": 10,
+    "category": "Tilbehør",
+    "is_available": true,
+    "sort_order": 82,
+    "allergens": [
+      "aeg",
+      "gluten"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "b1d7e732-1154-4f45-a81b-3e5f7b78cdb2",
+    "name": "Hjemmelavet teriyaki",
+    "description": null,
+    "price": 10,
+    "category": "Tilbehør",
+    "is_available": true,
+    "sort_order": 83,
+    "allergens": [
+      "gluten",
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "4c0b14ce-1f24-4c5e-81c9-647650cceb47",
+    "name": "Sød chilisauce",
+    "description": null,
+    "price": 10,
+    "category": "Tilbehør",
+    "is_available": true,
+    "sort_order": 84,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "uncertain"
+  },
+  {
+    "id": "697b1b7e-bd1c-48b7-bdcb-c91b2e84179b",
+    "name": "Ebi Tempura Menu (24 stk.)",
+    "description": "8 deluxe ebi tempura rejer med avocado, 8 deluxe ebi tempura rejer med laks, 8 deluxe ebi tempura rejer med regnbue",
+    "price": 328,
+    "category": "Menuer",
+    "is_available": true,
+    "sort_order": 85,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "60a34a18-b4e3-47c9-beb2-63dfcb3cb15b",
+    "name": "Nigiri Menu (8 stk.)",
+    "description": "2 laks, 2 laks med avocado, 2 grillet laks, 2 tun",
+    "price": 138,
+    "category": "Menuer",
+    "is_available": true,
+    "sort_order": 86,
+    "allergens": [
+      "fisk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "9a45adee-ce71-45c1-87e6-b4920290bb0c",
+    "name": "Uramaki Menu (32 stk.)",
+    "description": "8 ebi tempura rejer med sesamfrø, 8 laks deluxe roll, 8 rainbow roll, 8 Alaska roll",
+    "price": 388,
+    "category": "Menuer",
+    "is_available": true,
+    "sort_order": 87,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "maelk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "d6d14ec5-7f27-43ac-aef1-7bc4ea002a19",
+    "name": "Vegetar Menu (18 stk.)",
+    "description": "8 toppet maki: Vegetar Roll med avocado, 8 hosomaki: agurk, 2 nigiri: 1 tofu, 1 agurk",
+    "price": 168,
+    "category": "Menuer",
+    "is_available": true,
+    "sort_order": 88,
+    "allergens": [
+      "soja"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "f48f2acd-7b2b-49db-b902-57a2f06ab605",
+    "name": "10 Box (10 stk.)",
+    "description": "8 uramaki: ebi tempura rejer med sesamfrø, 2 nigiri: laks",
+    "price": 120,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 89,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "da4c38bf-b660-4203-a076-dff3c166464a",
+    "name": "20 Box (20 stk.)",
+    "description": "8 uramaki: ebi tempura rejer med sesamfrø, 8 uramaki: spicy laks, 4 nigiri: 2 laks, 2 tun",
+    "price": 260,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 90,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "42e78daa-5742-4f80-a239-4698a8a9eacf",
+    "name": "30 Box (30 stk.)",
+    "description": "8 uramaki: ebi tempura rejer med sesamfrø, 8 uramaki: spicy laks, 8 toppet maki: rainbow roll, 6 nigiri: 2 laks, 2 tun, 2 rejer",
+    "price": 360,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 91,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "36eb0ff0-00a0-4605-a71b-3589b436566b",
+    "name": "40 Box (40 stk.)",
+    "description": "8 uramaki: California, 8 uramaki: Spicy laks, 8 toppet maki: ebi tempura rejer med avocado, 16 nigiri: 4 laks, 4 tun, 4 rejer, 4 grillet laks",
+    "price": 460,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 92,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "077c3622-18e1-4c00-8ca7-96ab3805ea28",
+    "name": "50 Box (50 stk.)",
+    "description": "8 uramaki: Spicy laks, 8 uramaki: California, 8 toppet maki: Ebi tempura rejer med avocado, 8 toppet maki: Laks deluxe roll, 18 nigiri: 4 laks, 4 tun, 4 rejer, 4 grillet laks, 2 avocado",
+    "price": 600,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 93,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "346b1c06-3c74-4b19-a9cb-3064024ccd79",
+    "name": "60 Box (60 stk.)",
+    "description": "8 uramaki: Spicy tun, 8 uramaki: Alaska, 8 toppet maki: Ebi tempura rejer med avocado, 8 toppet maki: Laks deluxe roll, 8 Rainbow roll, 20 nigiri: 5 laks, 5 tun, 5 rejer, 5 grillet laks",
+    "price": 700,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 94,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "maelk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "eeec3cdf-645d-43e0-9d16-f649d7749758",
+    "name": "70 Box (70 stk.)",
+    "description": "8 uramaki: Spicy tun, 8 uramaki: Alaska, 8 toppet maki: Ebi tempura med avocado, 8 toppet maki: Ebi tempura med laks, 8 toppet maki: Rainbow roll, 8 toppet maki: Laks deluxe roll, 22 nigiri: 5 laks, 5 tun, 5 rejer, 5 grillet laks, 2 krebsehaler",
+    "price": 820,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 95,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "maelk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "395b5e29-382d-4b12-bc10-de72f012adfc",
+    "name": "80 Box (80 stk.)",
+    "description": "8 uramaki: Spicy tun, 8 uramaki: Alaska, 8 uramaki: California, 8 toppet maki: Ebi tempura med avocado, 8 toppet maki: Ebi tempura med laks, 8 toppet maki: Rainbow roll, 8 toppet maki: Laks deluxe roll, 24 nigiri: 5 laks, 5 tun, 5 rejer, 5 grillet laks, 4 krebsehaler",
+    "price": 950,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 96,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "maelk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "06050dd7-5458-4781-901a-c1d4c54a03a0",
+    "name": "Box 90 (90 stk.)",
+    "description": "Sammensættes af sushikok",
+    "price": 1050,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 97,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": "Sammensættes af kokken og varierer. Ring til os om allergener.",
+    "allergen_confidence": "uncertain"
+  },
+  {
+    "id": "05050a9f-7bae-4706-8c4d-9549d4b998c1",
+    "name": "Box 100 (100 stk.)",
+    "description": "Sammensættes af sushikok",
+    "price": 1200,
+    "category": "Sushi Box",
+    "is_available": true,
+    "sort_order": 98,
+    "allergens": [],
+    "allergens_reviewed": false,
+    "allergen_note": "Sammensættes af kokken og varierer. Ring til os om allergener.",
+    "allergen_confidence": "uncertain"
+  },
+  {
+    "id": "8da6e60a-2a50-42d5-bf30-1f2f80e6cf34",
+    "name": "Super Tilbud Menu 1 (36 stk.)",
+    "description": "8 nigiri (2 stk. af hver: rejer, laks, tun og flamberet laks), 6 futomaki med tempura rejer, 6 futomaki med tempura kylling, 8 Alaska med laks, 8 topping med tempurareje og flamberet laks",
+    "price": 300,
+    "category": "Super Tilbud",
+    "is_available": true,
+    "sort_order": 99,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "maelk"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "a8d3b9ad-39fe-4626-9d8d-845081a7412a",
+    "name": "Super Tilbud Menu 2 (70 stk.)",
+    "description": "12 nigiri (3 stk. af hver: rejer, laks, tun og flamberet laks), 12 futomaki med tempura rejer, 6 futomaki med tempura kylling, 8 Alaska med laks, 8 spicy rejer, 8 topping med tempurareje og flamberet laks, 8 topping rainbow med surimi, 8 hosomaki med agurk",
+    "price": 530,
+    "category": "Super Tilbud",
+    "is_available": true,
+    "sort_order": 100,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "maelk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  },
+  {
+    "id": "1dbe2ac8-4085-4118-98e7-0fe34b89e8c0",
+    "name": "Super Tilbud Menu 3 (104 stk.)",
+    "description": "16 nigiri (4 stk. af hver: rejer, laks, tun og flamberet laks), 12 futomaki med tempura rejer, 12 futomaki med tempura kylling, 8 Alaska med laks, 8 flying chicken, 8 spicy rejer, 8 spicy tun, 8 topping med tempurareje og flamberet laks, 8 topping rainbow med surimi, 8 hosomaki med agurk, 8 hosomaki med laks",
+    "price": 750,
+    "category": "Super Tilbud",
+    "is_available": true,
+    "sort_order": 101,
+    "allergens": [
+      "aeg",
+      "fisk",
+      "gluten",
+      "krebsdyr",
+      "maelk",
+      "sesam"
+    ],
+    "allergens_reviewed": false,
+    "allergen_note": null,
+    "allergen_confidence": "standard"
+  }
+]

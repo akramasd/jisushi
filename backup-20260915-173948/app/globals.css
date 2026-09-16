@@ -1,0 +1,474 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ══ Ji Sushi brand tokens ═══════════════════════════════════════
+   Sampled from the brand sheet, not approximated.
+
+   CONTRAST RULE — measured:
+     gold on ground  8.58:1  ✓ safe as text
+     gold on cream   1.81:1  ✗ ornament ONLY (rules, patterns, hairlines)
+   Metals carry text on dark grounds and are decoration on light ones. */
+@theme {
+  --color-sumi: #0E0F11;
+  --color-sumi-raise: #17181B;
+  --color-slate-ink: #313A40;
+  --color-kami: #EEE7D4;
+  --color-gold: #C1AB7F;
+  --color-gold-lit: #D4C29D;
+  --color-silver: #A6AAAD;
+  --color-silver-lit: #E3E4E4;
+  --color-muted-ink: #C9C9CA;
+
+  /* Three-tier type system from the brand sheet. Shippori Mincho is held back
+     purely for kanji — Cormorant and EB Garamond carry no CJK glyphs, so
+     without it every 食べ放題 would render as empty boxes. */
+  --font-display: var(--font-cormorant), "Hiragino Mincho ProN", Georgia, serif;
+  --font-body: var(--font-eb-garamond), Georgia, "Times New Roman", serif;
+  --font-accent: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-kanji: var(--font-shippori), "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+:root {
+  --ji-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ji-display { font-family: var(--font-display); font-weight: 400; }
+.ji-body { font-family: var(--font-body); }
+.ji-accent { font-family: var(--font-accent); }
+.ji-kanji { font-family: var(--font-kanji); }
+
+.ji-eyebrow {
+  font-family: var(--font-accent);
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+/* At 0.36em a long eyebrow measures ~384px — wider than the 342px of content
+   a 390px phone actually has. Tighten tracking rather than shrink the type. */
+@media (max-width: 520px) {
+  .ji-eyebrow { letter-spacing: 0.2em; }
+}
+
+/* Metallic type — the sheen on the brand sheet's primary logo */
+.ji-metal-gold {
+  background-image: linear-gradient(100deg,#9d8759 0%,#D4C29D 42%,#b39a6c 62%,#D4C29D 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+@supports not (background-clip: text) { .ji-metal-gold { color:#D4C29D; background-image:none } }
+
+/* Link underline that grows from the left */
+.ji-link { position: relative; display: inline-block; }
+.ji-link::after {
+  content:""; position:absolute; left:0; bottom:-3px; height:1px; width:100%;
+  background:currentColor; transform:scaleX(0); transform-origin:right;
+  transition:transform .42s var(--ji-ease);
+}
+.ji-link:hover::after, .ji-link:focus-visible::after { transform:scaleX(1); transform-origin:left }
+
+/* The brushed mark. Strokes are normalised to pathLength 1 so the draw works
+   at any scale; the eye lands after them, the way you'd actually draw a fish. */
+.ink-stroke { stroke-dasharray:1; stroke-dashoffset:1; animation: ink-draw .9s var(--ji-ease) forwards }
+.ink-stroke-2 { animation-delay:.14s }
+.ink-dot { opacity:0; animation: ink-dot .38s var(--ji-ease) .9s forwards }
+@keyframes ink-draw { to { stroke-dashoffset:0 } }
+@keyframes ink-dot { from{opacity:0;transform:scale(.3)} to{opacity:1;transform:none} }
+
+@keyframes ji-rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+.ji-rise { animation: ji-rise .8s var(--ji-ease) both }
+
+/* Reveal on scroll — the hidden class is added by JS, so with JS off nothing
+   is ever stranded invisible. */
+.ji-reveal { opacity:0; transform:translateY(20px);
+  transition:opacity .9s var(--ji-ease), transform .9s var(--ji-ease) }
+.ji-reveal.is-in { opacity:1; transform:none }
+
+/* Photography scrim so type stays readable on any frame */
+.ji-scrim::after { content:""; position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(14,15,17,.94) 0%,rgba(14,15,17,.58) 45%,rgba(14,15,17,.36) 100%) }
+
+@keyframes ji-drift { from{transform:scale(1.06)} to{transform:scale(1.14) translateY(-1.5%)} }
+.ji-drift { animation: ji-drift 26s ease-in-out infinite alternate }
+
+/* Every heading on every page picks up the display serif from one rule, rather
+   than editing ten page files and inevitably missing some. Weight is left to
+   whatever utility the page already sets — Cormorant reads well at 300–500. */
+h1, h2, h3, h4 { font-family: var(--font-display); }
+
+/* Numbers stay in the sans: prices and phone numbers must be unambiguous, and
+   a high-contrast serif gets fragile at small sizes. */
+.tabular-nums, [class*="tabular"] { font-variant-numeric: tabular-nums; }
+
+/* Danish sets long compounds — Retningslinjer, Køkkenmedhjælper */
+body { hyphens:auto; overflow-wrap:break-word }
+h1,h2,h3 { hyphens:manual; text-wrap:balance }
+
+:focus-visible { outline:2px solid currentColor; outline-offset:3px }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior:smooth } }
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important; animation-delay:0ms!important;
+    animation-iteration-count:1!important; transition-duration:.01ms!important;
+    transition-delay:0ms!important; scroll-behavior:auto!important;
+  }
+  .ji-reveal { opacity:1!important; transform:none!important }
+}
+
+.sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border-width:0 }
+
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Adding custom animations */
+  --animate-fade-in: fade-in 0.8s ease-out;
+  --animate-fade-in-up: fade-in-up 1s ease-out;
+  --animate-dropdown: dropdown 0.3s ease-out;
+  --animate-slide-shine: slide-shine 1.5s ease-in-out;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom keyframe animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+/* Added scroll-triggered lift animation for mobile */
+@keyframes lift-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Adding New Year banner animations */
+/* Removed confetti animation, added gentle leaf falling animation */
+@keyframes leaf-fall {
+  0% {
+    /* Start from current position (varied by inline style) instead of fixed -100vh */
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(30px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg) translateX(-30px);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* More subtle glow effect */
+@keyframes subtle-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+  }
+}
+
+@keyframes pulse-scale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-leaf-fall {
+  animation: leaf-fall linear infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.animate-subtle-glow {
+  animation: subtle-glow 3s ease-in-out infinite;
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s ease-in-out infinite;
+}
+
+/* Added 3D flip card styles and shine effect */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Shine now plays only once when triggered, not infinite */
+.shine-overlay {
+  position: absolute;
+  inset: 0;
+  /* Changed shine angle to diagonal backslash direction (135deg) */
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+  animation: shine-sweep 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes shine-sweep {
+  0% {
+    transform: translate(-150%, -150%);
+  }
+  100% {
+    transform: translate(150%, 150%);
+  }
+}
+
+/* Added intersection observer animation class */
+@media (max-width: 768px) {
+  .price-card {
+    opacity: 0;
+    animation: lift-up 0.6s ease-out forwards;
+  }
+
+  .price-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .price-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+}
+
+/* Hide the "built with v0" badge */
+[data-testid="v0-badge"],
+a[href*="v0.dev"],
+div[class*="v0-badge"],
+#v0-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* ============================================================
+   Kitchen ticket
+   
+   A takeaway bag needs a physical ticket stapled to it. Printing the KDS as-is
+   gives a dark-mode screenshot across three pages; this reduces it to one
+   receipt-width slip in ink-friendly black on white.
+   
+   Scoped to [data-print-ticket] so the customer-facing pages print normally.
+   ============================================================ */
+@media print {
+  body:has([data-print-ticket]) * { visibility: hidden }
+  body:has([data-print-ticket]) [data-print-ticket],
+  body:has([data-print-ticket]) [data-print-ticket] * { visibility: visible }
+
+  [data-print-ticket] {
+    position: absolute; inset: 0 auto auto 0;
+    width: 72mm;                    /* standard thermal receipt width */
+    padding: 4mm;
+    background: #fff !important;
+    color: #000 !important;
+    border: 0 !important;
+    font-size: 11pt;
+  }
+  [data-print-ticket] * { color: #000 !important; border-color: #000 !important }
+  [data-print-ticket] [data-print-hide] { display: none !important }
+  [data-print-ticket] .ji-display { font-size: 20pt }
+
+  @page { margin: 4mm; size: 72mm auto }
+}

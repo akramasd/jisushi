@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "preserve",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "allowImportingTsExtensions": true,
+    "types": [],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "ignoreDeprecations": "6.0",
+    "baseUrl": "..",
+    "paths": { "@/*": ["./*"] }
+  },
+  "include": [
+    "stubs.d.ts",
+    "../app/**/*.ts", "../app/**/*.tsx",
+    "../components/**/*.tsx", "../components/**/*.ts",
+    "../lib/**/*.ts", "../hooks/**/*.ts",
+    "../middleware.ts"
+  ],
+  "exclude": ["../components/ui/**"]
+}
