@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { serviceClient } from "@/lib/supabase"
 import { rateLimit, clientIp } from "@/lib/rate-limit"
-import { isDemoMode, isDemoToken } from "@/lib/demo"
+import { isDemoMode, isDemoToken, isIsolatedDemo } from "@/lib/demo"
 
 export const dynamic = "force-dynamic"
 
@@ -19,13 +19,14 @@ export async function GET(
   const { token } = await ctx.params
 
   // --------------------------------------------------------
-  // DEMO MODE — stateless, uden live DB. Demo-tokens starter med demo- og kan
-  // aldrig kollidere med production /^[a-f0-9]{32}$/.
+  // ISOLERET DEMO — stateless, uden live DB. Demo-tokens starter med demo- og
+  // kan aldrig kollidere med production /^[a-f0-9]{32}$/.
   // Klienten lægger den fulde ordre i localStorage efter checkout; denne
   // server-fallback sikrer at direkte navigation/refresh stadig viser en
   // realistisk ordre uden persistence.
+  // Med ejerens live-writes flag bruges den ægte DB-vej nedenfor i stedet.
   // --------------------------------------------------------
-  if (isDemoMode()) {
+  if (isIsolatedDemo()) {
     if (!isDemoToken(token)) {
       return NextResponse.json(
         { ok: false, error: "Ukendt ordre.", demo: true },
@@ -106,6 +107,8 @@ export async function GET(
 
     return NextResponse.json({
       ok: true,
+      // I demo+live-writes fortæller vi klienten at ordren er ægte.
+      ...(isDemoMode() ? { demo: false } : null),
       order: {
         orderNo: data.order_no,
         status: data.status,

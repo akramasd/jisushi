@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import { isDemoMode } from "@/lib/demo"
+import { isDemoMode, isDemoLiveWrites } from "@/lib/demo"
 import { AnimatedHeader } from "@/components/animated-header"
 import { Footer } from "@/components/footer"
 
@@ -35,7 +35,9 @@ const DEMO_RESERVATIONS = [
 const STEPS = ["Modtaget", "Bekræftet", "Tilberedes", "Klar", "Afhentet"];
 
 export default function StaffPage() {
-  if (isDemoMode()) {
+  // Med ejerens live-writes flag er ordrerne rigtige, så personalet skal ind
+  // på den rigtige portal — præcis som production.
+  if (isDemoMode() && !isDemoLiveWrites()) {
     return (
       <div className="min-h-screen bg-sumi text-white flex flex-col">
         <AnimatedHeader />

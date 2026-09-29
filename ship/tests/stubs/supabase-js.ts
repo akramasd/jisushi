@@ -639,6 +639,53 @@ async function rpc(
     }
   }
 
+  if (name === "create_web_reservation") {
+    const key = String(args.p_idempotency_key ?? "");
+
+    const existing = db.reservations.find(
+      (row) => row.idempotency_key === key,
+    );
+
+    if (existing) {
+      return {
+        data: {
+          ok: true,
+          idempotent: true,
+          reservation_no: existing.reservation_no,
+          status: existing.status,
+          reserved_at: existing.reserved_at,
+        },
+        error: null,
+      };
+    }
+
+    const row: Row = {
+      id: `res-${Math.random().toString(36).slice(2, 10)}`,
+      reservation_no: ++reservationSeq,
+      customer_name: String(args.p_customer_name ?? ""),
+      customer_phone: String(args.p_customer_phone ?? ""),
+      customer_email: args.p_customer_email ?? null,
+      party_size: Number(args.p_party_size ?? 0),
+      reserved_at: `${String(args.p_date ?? "")}T${String(args.p_time ?? "")}:00.000Z`,
+      status: "pending_owner_confirmation",
+      idempotency_key: key,
+      created_at: new Date().toISOString(),
+    };
+
+    db.reservations.push(row);
+
+    return {
+      data: {
+        ok: true,
+        idempotent: false,
+        reservation_no: row.reservation_no,
+        status: row.status,
+        reserved_at: row.reserved_at,
+      },
+      error: null,
+    };
+  }
+
   return {
     data: null,
     error: {

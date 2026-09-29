@@ -7,6 +7,7 @@ import {
 } from "@/lib/phone"
 import {
   isDemoMode,
+  isIsolatedDemo,
   newDemoReservationNo,
 } from "@/lib/demo"
 export const dynamic = "force-dynamic"
@@ -113,9 +114,10 @@ export async function POST(req: Request) {
     }
 
     // --------------------------------------------------------
-    // DEMO MODE — fake reservation lokalt, aldrig Supabase/notify.
+    // ISOLERET DEMO — fake reservation lokalt, aldrig Supabase/notify.
+    // Med ejerens live-writes flag bruges den ægte production-vej nedenfor.
     // --------------------------------------------------------
-    if (isDemoMode()) {
+    if (isIsolatedDemo()) {
       const reservedAt = new Date(`${date}T${time}:00`).toISOString()
       return NextResponse.json({
         ok: true,
@@ -180,6 +182,8 @@ export async function POST(req: Request) {
     return NextResponse.json({
       ok: true,
       replay: result.idempotent,
+      // I demo+live-writes fortæller vi klienten at reservationen er ægte.
+      ...(isDemoMode() ? { demo: false } : null),
       reservationNo: result.reservation_no,
       status: result.status,
       reservedAt: result.reserved_at,

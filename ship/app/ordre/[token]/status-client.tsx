@@ -43,27 +43,33 @@ export default function StatusClient({ token }: { token: string }) {
   const [isDemo, setIsDemo] = useState(
     () =>
       typeof process !== "undefined" &&
-      process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1",
+      process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1" &&
+      process.env.NEXT_PUBLIC_PREPNEST_DEMO_LIVE_WRITES !== "1",
   )
   const [, tick] = useState(0)
 
   const load = useCallback(async () => {
-    // Demo-local først: checkout gemte den fulde ordre i localStorage, så
+    // Isoleret demo først: checkout gemte den fulde ordre i localStorage, så
     // tracking virker uden server-side persistence. Tokens er demo-prefixed.
-    try {
-      const saved = localStorage.getItem(`ji-demo-order-${token}`)
-      if (saved) {
-        const parsed = JSON.parse(saved) as Order
-        if (parsed && parsed.orderNo) {
-          setOrder(parsed)
-          setError(null)
-          setStale(false)
-          setIsDemo(true)
-          return
+    // Med live-writes springes cachen over — ordren er ægte og hentes fra DB.
+    if (
+      process.env.NEXT_PUBLIC_PREPNEST_DEMO_LIVE_WRITES !== "1"
+    ) {
+      try {
+        const saved = localStorage.getItem(`ji-demo-order-${token}`)
+        if (saved) {
+          const parsed = JSON.parse(saved) as Order
+          if (parsed && parsed.orderNo) {
+            setOrder(parsed)
+            setError(null)
+            setStale(false)
+            setIsDemo(true)
+            return
+          }
         }
+      } catch {
+        /* ignorer corrupt demo-cache og fald tilbage til API */
       }
-    } catch {
-      /* ignorer corrupt demo-cache og fald tilbage til API */
     }
     try {
       const res = await fetch(`/api/order/${token}`, {
@@ -78,6 +84,7 @@ export default function StatusClient({ token }: { token: string }) {
       }
 
       if (data.demo) setIsDemo(true)
+      if (data.demo === false) setIsDemo(false)
       setOrder(data.order)
       setError(null)
       setStale(false)

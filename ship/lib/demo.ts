@@ -27,6 +27,28 @@ export function isDemoModeClient(): boolean {
   return process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1";
 }
 
+/**
+ * EKSPLICIT FRAVÆLGELSE af isolationen: demo-siden sender RIGTIGE ordrer og
+ * reservationer til live Supabase/køkken/Sheets/notifikationer.
+ *
+ * Kræver BÅDE demo-mode OG PREPNEST_DEMO_LIVE_WRITES=1 (server) eller
+ * NEXT_PUBLIC_PREPNEST_DEMO_LIVE_WRITES=1 (client/build). Uden flaget er demo
+ * 100% isoleret som før. Dette flag må ALDRIG sættes på et offentligt preview —
+ * kun lokalt eller eftertrykkeligt ejer-samtykke, da hver testordre lander i
+ * det rigtige køkken og udløser rigtige notifikationer.
+ */
+export function isDemoLiveWrites(): boolean {
+  return (
+    process.env.PREPNEST_DEMO_LIVE_WRITES === "1" ||
+    process.env.NEXT_PUBLIC_PREPNEST_DEMO_LIVE_WRITES === "1"
+  );
+}
+
+/** Demo er isoleret netop når demo er aktiv UDEN live-writes flaget. */
+export function isIsolatedDemo(): boolean {
+  return isDemoMode() && !isDemoLiveWrites();
+}
+
 export function isDemoToken(token: string): boolean {
   if (!token.startsWith(DEMO_TOKEN_PREFIX)) return false;
   const hex = token.slice(DEMO_TOKEN_PREFIX.length);

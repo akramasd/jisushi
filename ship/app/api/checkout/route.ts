@@ -16,6 +16,7 @@ import { isValidDanishMobile, formatDanishPhone } from "@/lib/phone"
 import fallbackMenuJson from "@/data/menu-fallback.json"
 import {
   isDemoMode,
+  isIsolatedDemo,
   newDemoToken,
   newDemoOrderNo,
   demoAcceptBy,
@@ -184,12 +185,14 @@ export async function POST(req: Request) {
   }))
 
   // --------------------------------------------------------
-  // DEMO MODE — gratis, isoleret, uden live writes.
+  // ISOLERET DEMO — gratis, uden live writes.
   // Returnerer før første Supabase/Sheets/notify-kald, så demo kan køre uden
   // SUPABASE_SERVICE_ROLE_KEY, SHEET secrets, SMS/Brevo secrets.
   // Production er uændret når PREPNEST_DEMO_MODE ikke er aktiv.
+  // Ejerens eksplicitte live-writes flag (PREPNEST_DEMO_LIVE_WRITES=1) springer
+  // denne gren over, så ordren går den ægte production-vej nedenfor.
   // --------------------------------------------------------
-  if (isDemoMode()) {
+  if (isIsolatedDemo()) {
     const priced = priceOrder(rawItems, fallbackMenu)
 
     if (!priced.ok) {
@@ -248,6 +251,9 @@ export async function POST(req: Request) {
       return NextResponse.json({
         ok: true,
         replay: true,
+        // I demo+live-writes fortæller vi klienten at ordren er ægte.
+        // Uden demo-mode er feltet fraværende præcis som før.
+        ...(isDemoMode() ? { demo: false } : null),
         orderNo: existing.order_no,
         total: Number(existing.total_price),
         token: existing.public_token,
@@ -357,6 +363,9 @@ export async function POST(req: Request) {
     return NextResponse.json({
       ok: true,
       replay: order.idempotent,
+      // I demo+live-writes fortæller vi klienten at ordren er ægte.
+      // Uden demo-mode er feltet fraværende præcis som før.
+      ...(isDemoMode() ? { demo: false } : null),
       orderNo: order.order_no,
       total: Number(order.total_price),
       token: order.public_token,

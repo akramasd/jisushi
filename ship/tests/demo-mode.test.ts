@@ -86,6 +86,18 @@ function disableDemo() {
   delete process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE;
 }
 
+function enableLiveWrites() {
+  enableDemo();
+  process.env.PREPNEST_DEMO_LIVE_WRITES = "1";
+  process.env.NEXT_PUBLIC_PREPNEST_DEMO_LIVE_WRITES = "1";
+}
+
+function disableLiveWrites() {
+  disableDemo();
+  delete process.env.PREPNEST_DEMO_LIVE_WRITES;
+  delete process.env.NEXT_PUBLIC_PREPNEST_DEMO_LIVE_WRITES;
+}
+
 beforeEach(() => {
   __reset({
     menu_items: [
@@ -315,5 +327,65 @@ describe("production path intact when demo off", () => {
     const tracked = await getStatus(result.body.token);
     assert.equal(tracked.status, 200);
     assert.equal(tracked.body.order.orderNo, result.body.orderNo);
+  });
+});
+
+describe("demo live-writes (ejerens eksplicitte fravalg af isolation)", () => {
+  test("checkout writes REAL order to Supabase, marked demo:false", async () => {
+    enableLiveWrites();
+    process.env.SUPABASE_SERVICE_ROLE_KEY = "stub-service-key";
+    try {
+      const result = await postCheckout(checkoutPayload());
+      assert.equal(result.status, 200);
+      assert.equal(result.body.ok, true);
+      assert.equal(result.body.demo, false);
+      assert.match(result.body.token, /^[a-f0-9]{32}$/);
+      assert.equal(result.body.status, "pending_owner_confirmation");
+      // ÆGTE write: rækken findes i stub-DB'en
+      assert.equal(__table("orders").length, 1);
+      const tracked = await getStatus(result.body.token);
+      assert.equal(tracked.status, 200);
+      assert.equal(tracked.body.demo, false);
+      assert.equal(tracked.body.order.orderNo, result.body.orderNo);
+    } finally {
+      disableLiveWrites();
+    }
+  });
+
+  test("booking writes REAL reservation, marked demo:false", async () => {
+    enableLiveWrites();
+    process.env.SUPABASE_SERVICE_ROLE_KEY = "stub-service-key";
+    try {
+      const result = await postReserve({
+        name: "Live Gæst",
+        phone: "31 33 44 86",
+        email: "live@example.com",
+        date: "2026-08-01",
+        time: "18:00",
+        guests: 2,
+        message: "",
+        idempotencyKey: `live-res-${++seq}`,
+      });
+      assert.equal(result.status, 200);
+      assert.equal(result.body.ok, true);
+      assert.equal(result.body.demo, false);
+      assert.ok(result.body.reservationNo);
+      assert.equal(__table("reservations").length, 1);
+    } finally {
+      disableLiveWrites();
+    }
+  });
+
+  test("without live-writes flag demo stays isolated", async () => {
+    enableDemo();
+    try {
+      assert.equal(demoLib.isDemoLiveWrites(), false);
+      assert.equal(demoLib.isIsolatedDemo(), true);
+      const result = await postCheckout(checkoutPayload());
+      assert.equal(result.body.demo, true);
+      assert.equal(__table("orders").length, 0);
+    } finally {
+      disableDemo();
+    }
   });
 });

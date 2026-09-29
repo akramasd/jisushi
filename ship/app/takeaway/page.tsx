@@ -8,7 +8,7 @@ import { supabase, serviceClient, type MenuItem } from "@/lib/supabase"
 import { getOpenState } from "@/lib/opening-hours"
 import { SITE } from "@/lib/site"
 import fallbackMenu from "@/data/menu-fallback.json"
-import { isDemoMode } from "@/lib/demo"
+import { isDemoMode, isDemoLiveWrites } from "@/lib/demo"
 
 export const metadata: Metadata = {
   title: "Takeaway",
@@ -22,12 +22,15 @@ export const revalidate = 60
 
 export default async function TakeawayPage() {
   const demo = isDemoMode()
-  // Demo-mode: brug udelukkende bundled fallback, ram aldrig live Supabase.
+  // Ejerens live-writes flag: siden er stadig demo-mærket, men menu og ordrer
+  // er RIGTIGE (live Supabase). Hver testordre lander i det rigtige køkken.
+  const liveWrites = demo && isDemoLiveWrites()
+  // Isoleret demo: brug udelukkende bundled fallback, ram aldrig live Supabase.
   // Kan køre uden SUPABASE_SERVICE_ROLE_KEY og uden anon-nøgler.
   let items: MenuItem[] = fallbackMenu as MenuItem[]
   let dbError = false
 
-  if (!demo) {
+  if (!demo || liveWrites) {
     try {
       const { data, error } = await supabase
         .from("menu_items")
@@ -54,8 +57,9 @@ export default async function TakeawayPage() {
   // deliver this news.
   //
   // Demo springer over: ingen live settings-læsning, aldrig pauset af live data.
+  // Med live-writes læses de rigtige settings, præcis som production.
   let paused: { on: boolean; message: string | null } = { on: false, message: null }
-  if (!demo) {
+  if (!demo || liveWrites) {
     try {
       const { data: trading } = await serviceClient()
         .from("restaurant_settings")
@@ -109,7 +113,9 @@ export default async function TakeawayPage() {
                 role="note"
                 className="mt-6 inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold"
               >
-                Demo — demomenu, ingen rigtige ordrer
+                {liveWrites
+                  ? "Demo-preview — OBS: ordrer er RIGTIGE og sendes til køkkenet"
+                  : "Demo — demomenu, ingen rigtige ordrer"}
               </p>
             )}
           </div>

@@ -253,6 +253,14 @@ export default function OrderClient({
             Demo — ingen rigtig ordre, ingen betaling
           </p>
         )}
+        {done.demo === false && demo && (
+          <p
+            role="note"
+            className="inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold mb-6"
+          >
+            Demo-preview — ordren er RIGTIG og sendt til køkkenet
+          </p>
+        )}
         <p className="ji-eyebrow text-white/70">Tak for din bestilling</p>
         <h2 className="ji-display text-[clamp(2rem,6vw,3.2rem)] mt-4">Ordre #{done.orderNo}</h2>
         <p className="ji-body text-[18px] text-white/75 mt-6 max-w-md mx-auto leading-[1.85]">

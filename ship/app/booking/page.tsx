@@ -28,6 +28,12 @@ type ReservationResponse = {
 const IS_DEMO =
   process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1"
 
+// Ejerens live-writes flag: reservationer er RIGTIGE og sendes til live.
+const IS_DEMO_LIVE_WRITES =
+  process.env.NEXT_PUBLIC_PREPNEST_DEMO_LIVE_WRITES === "1"
+
+const IS_ISOLATED_DEMO = IS_DEMO && !IS_DEMO_LIVE_WRITES
+
 export default function BookingPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -81,7 +87,7 @@ export default function BookingPage() {
       idem.current = newIdempotencyKey()
       // Demo-local kopi så reservationen kan vises uden server-persistence.
       try {
-        if ((data.demo ?? IS_DEMO) && data.reservationNo) {
+        if ((data.demo ?? IS_ISOLATED_DEMO) && data.reservationNo) {
           localStorage.setItem(
             `ji-demo-reservation-${data.reservationNo}`,
             JSON.stringify({
@@ -143,7 +149,9 @@ export default function BookingPage() {
               role="note"
               className="inline-block mt-4 border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold"
             >
-              Demo — ingen rigtig reservation
+              {IS_DEMO_LIVE_WRITES
+                ? "Demo-preview — OBS: reservationen er RIGTIG"
+                : "Demo — ingen rigtig reservation"}
             </p>
           )}
         </div>
@@ -152,12 +160,20 @@ export default function BookingPage() {
       <section className="max-w-2xl mx-auto px-6 py-16">
         {done ? (
           <div className="border border-gold/30 p-8 text-center">
-            {(done.demo ?? IS_DEMO) && (
+            {(done.demo ?? IS_ISOLATED_DEMO) && (
               <p
                 role="note"
                 className="inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold mb-4"
               >
                 Demo — ingen rigtig reservation
+              </p>
+            )}
+            {done.demo === false && IS_DEMO && (
+              <p
+                role="note"
+                className="inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold mb-4"
+              >
+                Demo-preview — reservationen er RIGTIG og sendt til Ji Sushi
               </p>
             )}
             <p className="ji-eyebrow text-gold">
