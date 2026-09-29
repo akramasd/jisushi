@@ -320,13 +320,14 @@ export async function POST(req: Request) {
     }
 
     // Customer's selected pickup time is treated as a preference until Owner
-    // confirms the real ETA.
+    // confirms the real ETA. 'accepted' er med for auto-accept dage, hvor
+    // triggeren allerede har flyttet ordren forbi pending_owner_confirmation.
     if (!order.idempotent) {
       await db
         .from("orders")
         .update({ pickup_minutes: pickupMinutes })
         .eq("id", order.order_id)
-        .eq("status", "pending_owner_confirmation")
+        .in("status", ["pending_owner_confirmation", "accepted"])
         .is("pickup_minutes", null)
 
       const { data: created } = await db

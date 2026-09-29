@@ -437,6 +437,68 @@ describe(
         )
       },
     )
+
+    test(
+      "auto-accept flag skips owner confirmation",
+      async () => {
+        __reset({
+          menu_items: MENU,
+          restaurant_settings: [
+            {
+              id: "main",
+              ordering_paused:
+                false,
+              pause_message: null,
+              auto_accept_orders:
+                true,
+            },
+          ],
+        })
+
+        setClock(OPEN)
+
+        const result =
+          await j(
+            await post(
+              payload(),
+            ),
+          )
+
+        assert.equal(
+          result.status,
+          200,
+        )
+
+        assert.equal(
+          result.body.ok,
+          true,
+        )
+
+        assert.equal(
+          result.body.status,
+          "accepted",
+        )
+
+        const row =
+          __table(
+            "orders",
+          )[0]
+
+        assert.equal(
+          row.status,
+          "accepted",
+        )
+
+        assert.ok(
+          row.accepted_at,
+        )
+
+        assert.equal(
+          row.pickup_minutes,
+          30,
+        )
+      },
+    )
   },
 )
 

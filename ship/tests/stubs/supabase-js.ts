@@ -566,6 +566,14 @@ async function rpc(
     const now =
       new Date()
 
+    // Spejler live-triggeren trg_auto_accept_new_orders: når flaget er ON,
+    // fødes ordren direkte som 'accepted'.
+    const autoAccept =
+      db.restaurant_settings.find(
+        (row) =>
+          row.id === 'main',
+      )?.auto_accept_orders === true
+
     const row: Row = {
       id: `id-${Math.random()
         .toString(36)
@@ -597,7 +605,9 @@ async function rpc(
         String(total),
       pickup_minutes: null,
       status:
-        'pending_owner_confirmation',
+        autoAccept
+          ? 'accepted'
+          : 'pending_owner_confirmation',
       channel:
         args.p_channel ??
         'takeaway',
@@ -609,6 +619,10 @@ async function rpc(
         now.toISOString(),
       updated_at:
         now.toISOString(),
+      accepted_at:
+        autoAccept
+          ? now.toISOString()
+          : null,
       accept_by:
         new Date(
           now.getTime() +
