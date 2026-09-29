@@ -2,6 +2,7 @@ import { redirect } from "next/navigation"
 import { isDemoMode, isDemoLiveWrites } from "@/lib/demo"
 import { AnimatedHeader } from "@/components/animated-header"
 import { Footer } from "@/components/footer"
+import StaffLookup from "./lookup-client"
 
 const DEMO_ORDERS = [
   {
@@ -121,6 +122,63 @@ export default function StaffPage() {
           <p className="ji-body text-[14px] text-white/55 mt-10 leading-[1.8]">
             Skrivehandlinger er deaktiveret i demo. Alle kitchen/admin/write-
             endpoints svarer 403 demo_mode_read_only.
+          </p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Med ejerens live-writes flag er ordrerne rigtige: vis et præsentabelt
+  // ejer-dashboard med live ordreopslag i stedet for en nøgen redirect.
+  if (isDemoMode() && isDemoLiveWrites()) {
+    return (
+      <div className="min-h-screen bg-sumi text-white flex flex-col">
+        <AnimatedHeader />
+        <main id="indhold" className="flex-1 max-w-4xl mx-auto px-6 py-16 w-full">
+          <p
+            role="note"
+            className="inline-block border border-gold/60 px-4 py-2 ji-accent text-[12px] tracking-[0.2em] uppercase text-gold"
+          >
+            Demo-preview — live data
+          </p>
+          <h1 className="ji-display text-[clamp(2rem,6vw,3rem)] mt-6">
+            Personale
+          </h1>
+          <p className="ji-body text-[16px] text-white/70 mt-4 leading-[1.8] max-w-xl">
+            Ejerside for Ji Sushi. Opslag nedenfor læser live-status direkte
+            fra databasen — ordrer bekræftes i staff-portalen.
+          </p>
+
+          <div className="mt-10 grid sm:grid-cols-3 gap-3">
+            <a
+              href="https://bczgdophgxjltnpzmkic.supabase.co/functions/v1/staff-portal"
+              className="ji-accent text-[13px] tracking-[0.18em] uppercase bg-gold text-sumi px-6 py-4 text-center"
+            >
+              Åbn køkkenportal
+            </a>
+            <a
+              href="/takeaway"
+              className="ji-accent text-[13px] tracking-[0.18em] uppercase border border-white/30 px-6 py-4 text-center hover:border-gold hover:text-gold transition-colors"
+            >
+              Takeaway
+            </a>
+            <a
+              href="/booking"
+              className="ji-accent text-[13px] tracking-[0.18em] uppercase border border-white/30 px-6 py-4 text-center hover:border-gold hover:text-gold transition-colors"
+            >
+              Booking
+            </a>
+          </div>
+
+          <div className="mt-8">
+            <StaffLookup />
+          </div>
+
+          <p className="ji-body text-[14px] text-white/55 mt-10 leading-[1.8]">
+            Tip: ordrens token står på kvitteringens “Følg din
+            bestilling”-link. Booking- og køkkenhandlinger foregår i
+            køkkenportalen.
           </p>
         </main>
         <Footer />
