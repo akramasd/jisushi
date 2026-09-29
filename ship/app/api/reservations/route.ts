@@ -5,7 +5,10 @@ import {
   isValidDanishMobile,
   formatDanishPhone,
 } from "@/lib/phone"
-
+import {
+  isDemoMode,
+  newDemoReservationNo,
+} from "@/lib/demo"
 export const dynamic = "force-dynamic"
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -107,6 +110,24 @@ export async function POST(req: Request) {
         { ok: false, error: "Ugyldig anmodning." },
         { status: 400 },
       )
+    }
+
+    // --------------------------------------------------------
+    // DEMO MODE — fake reservation lokalt, aldrig Supabase/notify.
+    // --------------------------------------------------------
+    if (isDemoMode()) {
+      const reservedAt = new Date(`${date}T${time}:00`).toISOString()
+      return NextResponse.json({
+        ok: true,
+        replay: false,
+        demo: true,
+        reservationNo: newDemoReservationNo(),
+        status: "pending_owner_confirmation",
+        reservedAt,
+        date,
+        time,
+        guests,
+      })
     }
 
     const { data, error } = await serviceClient().rpc(

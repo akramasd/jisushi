@@ -40,9 +40,31 @@ export default function StatusClient({ token }: { token: string }) {
   const [order, setOrder] = useState<Order | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [stale, setStale] = useState(false)
+  const [isDemo, setIsDemo] = useState(
+    () =>
+      typeof process !== "undefined" &&
+      process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1",
+  )
   const [, tick] = useState(0)
 
   const load = useCallback(async () => {
+    // Demo-local først: checkout gemte den fulde ordre i localStorage, så
+    // tracking virker uden server-side persistence. Tokens er demo-prefixed.
+    try {
+      const saved = localStorage.getItem(`ji-demo-order-${token}`)
+      if (saved) {
+        const parsed = JSON.parse(saved) as Order
+        if (parsed && parsed.orderNo) {
+          setOrder(parsed)
+          setError(null)
+          setStale(false)
+          setIsDemo(true)
+          return
+        }
+      }
+    } catch {
+      /* ignorer corrupt demo-cache og fald tilbage til API */
+    }
     try {
       const res = await fetch(`/api/order/${token}`, {
         cache: "no-store",
@@ -55,6 +77,7 @@ export default function StatusClient({ token }: { token: string }) {
         return
       }
 
+      if (data.demo) setIsDemo(true)
       setOrder(data.order)
       setError(null)
       setStale(false)
@@ -156,6 +179,14 @@ export default function StatusClient({ token }: { token: string }) {
   return (
     <section className="max-w-xl mx-auto px-6 py-16">
       <div className="text-center">
+        {isDemo && (
+          <p
+            role="note"
+            className="inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold mb-6"
+          >
+            Demo — ingen rigtig ordre
+          </p>
+        )}
         <p className="ji-eyebrow text-white/70">
           Ordre #{order.orderNo}
         </p>

@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import { serviceClient } from '@/lib/supabase'
 import { STAFF_COOKIE, verifySession } from '@/lib/staff-session'
 import { ALLERGEN_CODES } from '@/lib/allergens'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Staff review of allergen declarations.
@@ -19,6 +20,12 @@ async function authed() {
 const DENIED = () => NextResponse.json({ ok: false, error: 'Ikke logget ind.' }, { status: 401 })
 
 export async function GET() {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!(await authed())) return DENIED()
   try {
     const db = serviceClient()
@@ -35,6 +42,12 @@ export async function GET() {
 }
 
 export async function PATCH(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!(await authed())) return DENIED()
 
   let id = ''

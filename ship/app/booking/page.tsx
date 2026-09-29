@@ -19,7 +19,14 @@ type ReservationResponse = {
   reservationNo?: number
   status?: string
   reservedAt?: string
+  demo?: boolean
+  date?: string
+  time?: string
+  guests?: number
 }
+
+const IS_DEMO =
+  process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1"
 
 export default function BookingPage() {
   const [formData, setFormData] = useState({
@@ -72,6 +79,22 @@ export default function BookingPage() {
 
       setDone(data)
       idem.current = newIdempotencyKey()
+      // Demo-local kopi så reservationen kan vises uden server-persistence.
+      try {
+        if ((data.demo ?? IS_DEMO) && data.reservationNo) {
+          localStorage.setItem(
+            `ji-demo-reservation-${data.reservationNo}`,
+            JSON.stringify({
+              reservationNo: data.reservationNo,
+              status: data.status,
+              reservedAt: data.reservedAt,
+              date: data.date ?? formData.date,
+              time: data.time ?? formData.time,
+              guests: data.guests ?? Number(formData.guests),
+            }),
+          )
+        }
+      } catch {}
     } catch (error) {
       setError(networkMessage(error))
     } finally {
@@ -115,12 +138,28 @@ export default function BookingPage() {
           <p className="ji-body text-[17px] leading-[1.85] text-white/75">
             Send din reservation — Ji Sushi bekræfter den.
           </p>
+          {IS_DEMO && (
+            <p
+              role="note"
+              className="inline-block mt-4 border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold"
+            >
+              Demo — ingen rigtig reservation
+            </p>
+          )}
         </div>
       </section>
 
       <section className="max-w-2xl mx-auto px-6 py-16">
         {done ? (
           <div className="border border-gold/30 p-8 text-center">
+            {(done.demo ?? IS_DEMO) && (
+              <p
+                role="note"
+                className="inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold mb-4"
+              >
+                Demo — ingen rigtig reservation
+              </p>
+            )}
             <p className="ji-eyebrow text-gold">
               Reservation modtaget
             </p>

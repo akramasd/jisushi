@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { serviceClient } from '@/lib/supabase'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Deletes orders older than 30 days.
@@ -16,6 +17,12 @@ import { serviceClient } from '@/lib/supabase'
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   const secret = process.env.CRON_SECRET
   if (!secret) {
     return NextResponse.json({ ok: false, error: 'CRON_SECRET mangler.' }, { status: 503 })

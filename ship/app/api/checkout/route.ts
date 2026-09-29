@@ -14,6 +14,12 @@ import {
 } from "@/lib/pricing"
 import { isValidDanishMobile, formatDanishPhone } from "@/lib/phone"
 import fallbackMenuJson from "@/data/menu-fallback.json"
+import {
+  isDemoMode,
+  newDemoToken,
+  newDemoOrderNo,
+  demoAcceptBy,
+} from "@/lib/demo"
 
 const fallbackMenu = fallbackMenuJson as MenuRow[]
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -176,6 +182,55 @@ export async function POST(req: Request) {
     menu_item_id: id,
     quantity,
   }))
+
+  // --------------------------------------------------------
+  // DEMO MODE — gratis, isoleret, uden live writes.
+  // Returnerer før første Supabase/Sheets/notify-kald, så demo kan køre uden
+  // SUPABASE_SERVICE_ROLE_KEY, SHEET secrets, SMS/Brevo secrets.
+  // Production er uændret når PREPNEST_DEMO_MODE ikke er aktiv.
+  // --------------------------------------------------------
+  if (isDemoMode()) {
+    const priced = priceOrder(rawItems, fallbackMenu)
+
+    if (!priced.ok) {
+      const messages = {
+        empty: "Din kurv er tom.",
+        too_many: "Bestillingen er for stor.",
+        sold_out: `Desværre udsolgt: ${priced.detail ?? ""}.`,
+        missing: "En vare findes ikke i vores demomenu.",
+        bad_price: "Der er fejl i demokortets pris på en vare.",
+      } as const
+      const status =
+        priced.reason === "sold_out" || priced.reason === "missing"
+          ? 409
+          : 400
+      return NextResponse.json(
+        { ok: false, error: messages[priced.reason], demo: true },
+        { status },
+      )
+    }
+
+    const token = newDemoToken()
+    const acceptBy = demoAcceptBy()
+    return NextResponse.json({
+      ok: true,
+      replay: false,
+      demo: true,
+      orderNo: newDemoOrderNo(),
+      total: priced.total,
+      token,
+      status: "pending_owner_confirmation",
+      acceptBy,
+      pickupMinutes,
+      items: priced.lines.map((line) => ({
+        id: line.id,
+        name: line.name,
+        price: line.price,
+        qty: line.qty,
+        quantity: line.qty,
+      })),
+    })
+  }
 
   try {
     const db = serviceClient()

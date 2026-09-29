@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { serviceClient } from '@/lib/supabase'
 import { canAcceptTakeaway } from '@/lib/opening-hours'
 import { record, describeError } from '@/lib/monitor'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Uptime probe.
@@ -28,6 +29,21 @@ const MISSING_ENV = [
 
 export async function GET() {
   const started = Date.now()
+
+  // Demo: svar uden DB og uden secrets, så preview kan køre helt uden
+  // SUPABASE_SERVICE_ROLE_KEY, Sheets- og SMS-secrets.
+  if (isDemoMode()) {
+    return NextResponse.json(
+      {
+        status: 'demo',
+        db: 'demo-disabled',
+        demo: true,
+        acceptingOrders: true,
+        ms: Date.now() - started,
+      },
+      { headers: { 'Cache-Control': 'no-store' } },
+    )
+  }
 
   // Configuration first. There is no point testing a connection that was never
   // configured, and the answer would be misleading if we did.

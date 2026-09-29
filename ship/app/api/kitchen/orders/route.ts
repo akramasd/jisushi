@@ -5,6 +5,7 @@ import { STAFF_COOKIE, verifySession } from '@/lib/staff-session'
 import { canTransition, STATUSES, type OrderStatus } from '@/lib/order-status'
 import { notifyCustomer } from '@/lib/messaging'
 import { mirrorToSheet } from '@/lib/sheet-mirror'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * The kitchen's data path.
@@ -32,6 +33,12 @@ const DENIED = () => NextResponse.json({ ok: false, error: 'Ikke logget ind.' },
  *     &q=            — order number, name, or phone
  */
 export async function GET(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!(await authed())) return DENIED()
 
   const url = new URL(req.url)
@@ -93,6 +100,12 @@ export async function GET(req: Request) {
  * satisfies erasure while leaving the till reconcilable.
  */
 export async function DELETE(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!(await authed())) return DENIED()
 
   let phone = ''
@@ -125,6 +138,12 @@ export async function DELETE(req: Request) {
 }
 
 export async function PATCH(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!(await authed())) return DENIED()
 
   let id = ''

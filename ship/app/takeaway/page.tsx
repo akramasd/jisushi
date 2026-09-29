@@ -8,6 +8,7 @@ import { supabase, serviceClient, type MenuItem } from "@/lib/supabase"
 import { getOpenState } from "@/lib/opening-hours"
 import { SITE } from "@/lib/site"
 import fallbackMenu from "@/data/menu-fallback.json"
+import { isDemoMode } from "@/lib/demo"
 
 export const metadata: Metadata = {
   title: "Takeaway",
@@ -20,26 +21,29 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function TakeawayPage() {
-  // Always start with the bundled last-known-good menu.
-  // Supabase may replace it with fresher data below.
+  const demo = isDemoMode()
+  // Demo-mode: brug udelukkende bundled fallback, ram aldrig live Supabase.
+  // Kan køre uden SUPABASE_SERVICE_ROLE_KEY og uden anon-nøgler.
   let items: MenuItem[] = fallbackMenu as MenuItem[]
   let dbError = false
 
-  try {
-    const { data, error } = await supabase
-      .from("menu_items")
-      .select("id,name,description,price,category,is_available,sort_order,allergens,allergens_reviewed,allergen_note,allergen_confidence")
-      // NOT .order("id") — id is a random UUID, which listed the menu in an
-      // arbitrary sequence that matched neither the paper menu nor itself.
-      .order("sort_order", { ascending: true })
-      .order("name", { ascending: true })
-    if (error || !data || data.length === 0) {
+  if (!demo) {
+    try {
+      const { data, error } = await supabase
+        .from("menu_items")
+        .select("id,name,description,price,category,is_available,sort_order,allergens,allergens_reviewed,allergen_note,allergen_confidence")
+        // NOT .order("id") — id is a random UUID, which listed the menu in an
+        // arbitrary sequence that matched neither the paper menu nor itself.
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true })
+      if (error || !data || data.length === 0) {
+        dbError = true
+      } else {
+        items = data as MenuItem[]
+      }
+    } catch {
       dbError = true
-    } else {
-      items = data as MenuItem[]
     }
-  } catch {
-    dbError = true
   }
 
   // Read the owner's pause from the same V3 source of truth used by checkout.
@@ -48,19 +52,23 @@ export default async function TakeawayPage() {
   // Shown BEFORE the menu rather than at checkout: letting someone build a cart
   // and then telling them at the last step is the most annoying possible way to
   // deliver this news.
+  //
+  // Demo springer over: ingen live settings-læsning, aldrig pauset af live data.
   let paused: { on: boolean; message: string | null } = { on: false, message: null }
-  try {
-    const { data: trading } = await serviceClient()
-      .from("restaurant_settings")
-      .select("ordering_paused,pause_message")
-      .eq("id", "main")
-      .maybeSingle()
-    if (trading?.ordering_paused) {
-      paused = { on: true, message: trading.pause_message ?? null }
+  if (!demo) {
+    try {
+      const { data: trading } = await serviceClient()
+        .from("restaurant_settings")
+        .select("ordering_paused,pause_message")
+        .eq("id", "main")
+        .maybeSingle()
+      if (trading?.ordering_paused) {
+        paused = { on: true, message: trading.pause_message ?? null }
+      }
+    } catch {
+      // If this cannot be read, take orders. A pause that fails open costs a
+      // busy evening; one that fails closed costs every evening.
     }
-  } catch {
-    // If this cannot be read, take orders. A pause that fails open costs a
-    // busy evening; one that fails closed costs every evening.
   }
 
   // Category order is derived from where each category first appears in the
@@ -96,6 +104,14 @@ export default async function TakeawayPage() {
             <p className="ji-body text-[18px] leading-[1.85] text-white/75 max-w-xl">
               Vælg fra hele menukortet. Du betaler ved afhentning — kontant eller kort i butikken.
             </p>
+            {demo && (
+              <p
+                role="note"
+                className="mt-6 inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold"
+              >
+                Demo — demomenu, ingen rigtige ordrer
+              </p>
+            )}
           </div>
         </section>
 
@@ -108,7 +124,7 @@ export default async function TakeawayPage() {
             </p>
           </section>
         ) : (
-          <OrderClient items={items} categories={categories} openState={open} paused={paused} />
+          <OrderClient items={items} categories={categories} openState={open} paused={paused} demo={demo} />
         )}
       </main>
 

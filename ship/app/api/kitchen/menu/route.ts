@@ -4,6 +4,7 @@ import { serviceClient } from '@/lib/supabase'
 import { STAFF_COOKIE, verifySession } from '@/lib/staff-session'
 import { record, describeError } from '@/lib/monitor'
 import { mirrorToSheet } from '@/lib/sheet-mirror'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Menu and trading controls for the owner.
@@ -24,6 +25,12 @@ async function authed() {
 const DENIED = () => NextResponse.json({ ok: false, error: 'Ikke logget ind.' }, { status: 401 })
 
 export async function GET() {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!(await authed())) return DENIED()
   try {
     const db = serviceClient()
@@ -55,6 +62,12 @@ export async function GET() {
  *   { setting: 'ordering_paused', value: true, message?: '...' }
  */
 export async function PATCH(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!(await authed())) return DENIED()
 
   let body: Record<string, unknown> = {}

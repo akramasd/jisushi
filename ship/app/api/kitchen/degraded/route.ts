@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { serviceClient } from '@/lib/supabase'
 import { STAFF_COOKIE, verifySession } from '@/lib/staff-session'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Has anything bypassed the database recently?
@@ -14,6 +15,12 @@ import { STAFF_COOKIE, verifySession } from '@/lib/staff-session'
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   const jar = await cookies()
   if (!(await verifySession(jar.get(STAFF_COOKIE)?.value))) {
     return NextResponse.json({ ok: false }, { status: 401 })

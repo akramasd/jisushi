@@ -1,7 +1,16 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, IS_DEMO_BUILD } from '@/lib/site'
 
 export default function robots(): MetadataRoute.Robots {
+  // Demo-preview må aldrig crawles eller forveksles med live.
+  if (IS_DEMO_BUILD) {
+    return {
+      rules: {
+        userAgent: '*',
+        disallow: '/',
+      },
+    }
+  }
   return {
     rules: {
       userAgent: '*',

@@ -3,6 +3,7 @@ import { serviceClient } from '@/lib/supabase'
 import { record, describeError } from '@/lib/monitor'
 import { notifyCustomer } from '@/lib/messaging'
 import { canTransition, type OrderStatus } from '@/lib/order-status'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Status changes made in the spreadsheet, coming back the other way.
@@ -25,6 +26,12 @@ const FROM_DANISH: Record<string, OrderStatus> = {
 }
 
 export async function POST(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   let secret = ''
   let updates: { orderNo: string | number; status: string }[] = []
   try {

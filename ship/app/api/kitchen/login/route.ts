@@ -4,6 +4,7 @@ import { clientIp } from '@/lib/rate-limit'
 import { serviceClient } from '@/lib/supabase'
 import { alertOwner } from '@/lib/messaging'
 import { record } from '@/lib/monitor'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Exchanges the staff PIN for a signed session cookie.
@@ -31,6 +32,12 @@ const GLOBAL_ALERT_THRESHOLD = 25
 const WINDOW_MINUTES = 15
 
 export async function POST(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!staffAuthConfigured()) {
     return NextResponse.json(
       { ok: false, error: 'Personale-login er ikke sat op på denne installation.' },
@@ -114,6 +121,12 @@ export async function POST(req: Request) {
 
 /** Sign out — used by the "Log ud" control on the kitchen screen. */
 export async function DELETE() {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   const res = NextResponse.json({ ok: true })
   res.cookies.set(STAFF_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 })
   return res

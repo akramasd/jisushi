@@ -18,11 +18,13 @@ export default function OrderClient({
   categories,
   openState,
   paused = { on: false, message: null },
+  demo = process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1",
 }: {
   items: MenuItem[]
   categories: string[]
   openState: OpenState
   paused?: { on: boolean; message: string | null }
+  demo?: boolean
 }) {
   const [cart, setCart] = useState<Cart>({})
   const [sheet, setSheet] = useState(false)
@@ -32,7 +34,7 @@ export default function OrderClient({
   const [pickup, setPickup] = useState(30)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [done, setDone] = useState<{ orderNo: number | string; total: number; token: string | null; degraded?: boolean } | null>(null)
+  const [done, setDone] = useState<{ orderNo: number | string; total: number; token: string | null; degraded?: boolean; demo?: boolean; acceptBy?: string | null; pickupMinutes?: number | null } | null>(null)
   const [retrying, setRetrying] = useState(0)
   const [avoid, setAvoid] = useState<AllergenCode[]>([])
 
@@ -168,6 +170,10 @@ export default function OrderClient({
         total: number
         token: string | null
         degraded?: boolean
+        demo?: boolean
+        acceptBy?: string | null
+        pickupMinutes?: number | null
+        items?: { id?: string; name: string; price: number; qty?: number; quantity?: number }[]
       }>(
         "/api/checkout",
         {
@@ -186,7 +192,7 @@ export default function OrderClient({
         return
       }
 
-      setDone({ orderNo: data.orderNo, total: data.total, token: data.token, degraded: data.degraded })
+      setDone({ orderNo: data.orderNo, total: data.total, token: data.token, degraded: data.degraded, demo: data.demo ?? demo, acceptBy: data.acceptBy ?? null, pickupMinutes: data.pickupMinutes ?? pickup })
       setCart({})
       // Only now is the attempt over — a fresh key for any next order.
       idemKey.current = newIdempotencyKey()
@@ -197,6 +203,35 @@ export default function OrderClient({
         localStorage.setItem("ji-email", email.trim())
         // Survives a closed tab, so the receipt is findable from the car.
         if (data.token) localStorage.setItem("ji-last-order", data.token)
+        // Demo-local tracking: gem den fulde ordre så /ordre/[token] virker
+        // uden server-side persistence. Tokens er demo-prefixed, så ingen
+        // kollision med production.
+        if ((data.demo ?? demo) && data.token) {
+          const snapshotItems =
+            data.items ??
+            lines.map((l) => ({
+              name: l.item.name,
+              price: Number(l.item.price),
+              qty: l.qty,
+              quantity: l.qty,
+            }))
+          localStorage.setItem(
+            `ji-demo-order-${data.token}`,
+            JSON.stringify({
+              orderNo: data.orderNo,
+              status: "pending_owner_confirmation",
+              items: snapshotItems,
+              total: data.total,
+              pickupMinutes: data.pickupMinutes ?? pickup,
+              createdAt: new Date().toISOString(),
+              readyEstimate: null,
+              acceptBy:
+                data.acceptBy ??
+                new Date(Date.now() + 10 * 60_000).toISOString(),
+              reason: null,
+            }),
+          )
+        }
       } catch {}
     } catch (e) {
       setError(networkMessage(e))
@@ -210,6 +245,14 @@ export default function OrderClient({
     return (
       <section className="max-w-6xl mx-auto px-6 py-24 text-center">
         <FishMark draw className="w-28 h-14 mx-auto text-gold mb-10" strokeWidth={18} />
+        {(done.demo ?? demo) && (
+          <p
+            role="note"
+            className="inline-block border border-gold/50 px-4 py-2 ji-accent text-[12px] tracking-[0.18em] uppercase text-gold mb-6"
+          >
+            Demo — ingen rigtig ordre, ingen betaling
+          </p>
+        )}
         <p className="ji-eyebrow text-white/70">Tak for din bestilling</p>
         <h2 className="ji-display text-[clamp(2rem,6vw,3.2rem)] mt-4">Ordre #{done.orderNo}</h2>
         <p className="ji-body text-[18px] text-white/75 mt-6 max-w-md mx-auto leading-[1.85]">

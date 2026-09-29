@@ -42,7 +42,31 @@ export const COMPANY = {
   pNumber: '1028594441',
 } as const
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jisushi.dk'
+export const IS_DEMO_BUILD =
+  process.env.NEXT_PUBLIC_PREPNEST_DEMO_MODE === "1" ||
+  process.env.PREPNEST_DEMO_MODE === "1";
+
+/**
+ * Canonical origin. One definition, used by layout, robots and sitemap alike.
+ *
+ * Demo må aldrig hardcode jisushi.dk i metadata/canonical (SEO-risiko).
+ * I demo: NEXT_PUBLIC_SITE_URL -> VERCEL_URL -> localhost.
+ */
+function resolveSiteUrl(): string {
+  if (IS_DEMO_BUILD) {
+    const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+    if (explicit && explicit.trim().length > 0) return explicit.trim();
+    const vercel = process.env.VERCEL_URL;
+    if (vercel && vercel.trim().length > 0) {
+      const host = vercel.trim().replace(/^https?:\/\//, "");
+      return `https://${host}`;
+    }
+    return "http://localhost:3000";
+  }
+  return process.env.NEXT_PUBLIC_SITE_URL || "https://www.jisushi.dk";
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 /**
  * Schema.org Restaurant data. Google reads this for the local-business panel —

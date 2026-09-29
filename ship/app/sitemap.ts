@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, IS_DEMO_BUILD } from '@/lib/site'
 
 /** Public pages only — staff routes are deliberately absent. */
 const ROUTES = [
@@ -19,6 +19,8 @@ const ROUTES = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Demo-preview må ikke udstille sitemap-URLs der peger mod live-domænet.
+  if (IS_DEMO_BUILD) return []
   const now = new Date()
   return ROUTES.map((r) => ({
     url: `${SITE_URL}${r.path}`,

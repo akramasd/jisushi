@@ -3,7 +3,8 @@ import type { Metadata, Viewport } from "next"
 import { Cormorant_Garamond, EB_Garamond, Inter, Shippori_Mincho } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import { SITE_URL } from "@/lib/site"
+import { SITE_URL, IS_DEMO_BUILD } from "@/lib/site"
+import { DemoBanner } from "@/components/demo-banner"
 
 // Three tiers from the brand sheet: an elegant primary serif for display, a
 // secondary serif built for body copy, and a clean sans for micro-copy.
@@ -39,18 +40,27 @@ const shippori = Shippori_Mincho({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Ji Sushi — En moderne japansk restaurant i Frederikshavn",
+    default: IS_DEMO_BUILD
+      ? "Ji Sushi DEMO — ikke live bestilling"
+      : "Ji Sushi — En moderne japansk restaurant i Frederikshavn",
     template: "%s — Ji Sushi",
   },
-  description:
-    "All You Can Eat sushi og takeaway i Frederikshavn. Frisk sushi lavet til bestilling — bestil online eller ring og book bord.",
+  description: IS_DEMO_BUILD
+    ? "Demo-preview af Ji Sushi. Ingen rigtige ordrer, reservationer eller betalinger."
+    : "All You Can Eat sushi og takeaway i Frederikshavn. Frisk sushi lavet til bestilling — bestil online eller ring og book bord.",
+  // Demo må aldrig blive SEO-public: noindex + nofollow.
+  robots: IS_DEMO_BUILD ? { index: false, follow: false } : undefined,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "da_DK",
-    siteName: "Ji Sushi",
-    title: "Ji Sushi — En moderne japansk restaurant i Frederikshavn",
-    description: "All You Can Eat sushi og takeaway i Frederikshavn.",
+    siteName: IS_DEMO_BUILD ? "Ji Sushi DEMO" : "Ji Sushi",
+    title: IS_DEMO_BUILD
+      ? "Ji Sushi DEMO — ikke live"
+      : "Ji Sushi — En moderne japansk restaurant i Frederikshavn",
+    description: IS_DEMO_BUILD
+      ? "Demo-preview. Ingen rigtige ordrer."
+      : "All You Can Eat sushi og takeaway i Frederikshavn.",
     url: SITE_URL,
   },
 }
@@ -69,6 +79,7 @@ export default function RootLayout({
     >
       <body className="ji-body antialiased bg-sumi text-white">
         <a href="#indhold" className="sr-only focus:not-sr-only">Gå til indhold</a>
+        <DemoBanner />
         {children}
         <Analytics />
       </body>

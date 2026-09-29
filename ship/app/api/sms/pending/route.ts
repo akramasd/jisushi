@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { serviceClient } from '@/lib/supabase'
 import { record, describeError } from '@/lib/monitor'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * The Android SMS gateway polls this for messages to send.
@@ -30,6 +31,12 @@ function authorised(req: Request): boolean {
 }
 
 export async function GET(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   if (!authorised(req)) {
     return NextResponse.json({ ok: false, error: 'unauthorized' }, { status: 401 })
   }

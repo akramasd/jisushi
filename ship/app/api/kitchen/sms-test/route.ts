@@ -4,6 +4,7 @@ import { serviceClient } from '@/lib/supabase'
 import { STAFF_COOKIE, verifySession } from '@/lib/staff-session'
 import { enqueue, smsEnabled } from '@/lib/messaging'
 import { isValidDanishMobile, formatDanishPhone } from '@/lib/phone'
+import { isDemoMode } from '@/lib/demo'
 
 /**
  * Sends one test message, so the gateway can be proved before it is pointed at
@@ -16,6 +17,12 @@ import { isValidDanishMobile, formatDanishPhone } from '@/lib/phone'
 export const dynamic = 'force-dynamic'
 
 export async function POST(req: Request) {
+  if (isDemoMode()) {
+    return NextResponse.json(
+      { ok: false, error: 'Demo mode – read-only.', demo: true, code: 'demo_mode_read_only' },
+      { status: 403 },
+    )
+  }
   const jar = await cookies()
   if (!(await verifySession(jar.get(STAFF_COOKIE)?.value))) {
     return NextResponse.json({ ok: false, error: 'Ikke logget ind.' }, { status: 401 })
