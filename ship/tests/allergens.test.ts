@@ -117,7 +117,7 @@ describe('filtering, when someone is avoiding an allergen', () => {
   })
 
   test('a cleared item stays visible', () => {
-    assert.equal(shouldHide(reviewedClean, ['fisk']), true === false)
+    assert.equal(shouldHide(reviewedClean, ['fisk']), false)
   })
 
   test('UNREVIEWED items are hidden when filtering — the whole point', () => {

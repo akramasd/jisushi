@@ -28,6 +28,7 @@ export default function OrderClient({
   const [sheet, setSheet] = useState(false)
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
   const [pickup, setPickup] = useState(30)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -58,8 +59,10 @@ export default function OrderClient({
       if (saved) setCart(JSON.parse(saved))
       const savedName = localStorage.getItem("ji-name")
       const savedPhone = localStorage.getItem("ji-phone")
+      const savedEmail = localStorage.getItem("ji-email")
       if (savedName) setName(savedName)
       if (savedPhone) setPhone(savedPhone)
+      if (savedEmail) setEmail(savedEmail)
     } catch {
       /* Private mode, or corrupt value. An empty cart is a fine fallback. */
     }
@@ -138,7 +141,11 @@ export default function OrderClient({
   const phoneDigits = phone.replace(/\D/g, "").replace(/^45/, "")
   const nameOk = name.trim().length >= 2
   const phoneOk = phoneDigits.length === 8
-  const canSubmit = nameOk && phoneOk && lines.length > 0 && !busy && !closed
+  const emailOk =
+    email.trim().length === 0 ||
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+  const canSubmit =
+    nameOk && phoneOk && emailOk && lines.length > 0 && !busy && !closed
 
   const add = (id: string, d: number) =>
     setCart((c) => {
@@ -167,6 +174,7 @@ export default function OrderClient({
           items: lines.map((l) => ({ id: l.item.id, qty: l.qty })),
           name,
           phone,
+          email,
           pickupMinutes: pickup,
           idempotencyKey: idemKey.current,
         },
@@ -186,6 +194,7 @@ export default function OrderClient({
         localStorage.removeItem("ji-cart")
         localStorage.setItem("ji-name", name.trim())
         localStorage.setItem("ji-phone", phone.trim())
+        localStorage.setItem("ji-email", email.trim())
         // Survives a closed tab, so the receipt is findable from the car.
         if (data.token) localStorage.setItem("ji-last-order", data.token)
       } catch {}
@@ -204,7 +213,7 @@ export default function OrderClient({
         <p className="ji-eyebrow text-white/70">Tak for din bestilling</p>
         <h2 className="ji-display text-[clamp(2rem,6vw,3.2rem)] mt-4">Ordre #{done.orderNo}</h2>
         <p className="ji-body text-[18px] text-white/75 mt-6 max-w-md mx-auto leading-[1.85]">
-          Du betaler {kr(done.total)} kr ved afhentning på {SITE.street}. Er der noget, ringer vi til dig.
+          Du betaler {kr(done.total)} kr ved afhentning på {SITE.street}. Ji Sushi har nu op til 10 minutter til at bekræfte bestillingen.
         </p>
 
         {done.token ? (
@@ -439,6 +448,29 @@ export default function OrderClient({
                 {phone.length > 0 && !phoneOk
                   ? "Et dansk mobilnummer er 8 cifre."
                   : "Vi ringer kun, hvis der er noget med din ordre."}
+              </span>
+            </label>
+
+            <label className="block mb-5">
+              <span className="ji-eyebrow text-white/70 block mb-2">
+                E-mail <span className="text-white/40">(valgfri)</span>
+              </span>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                autoComplete="email"
+                aria-invalid={email.length > 0 && !emailOk}
+                className="w-full bg-transparent border border-white/25 px-4 py-3 ji-body focus:border-gold outline-none"
+              />
+              <span
+                className={`ji-body text-[13px] mt-2 block ${
+                  email.length > 0 && !emailOk ? "text-gold" : "text-white/55"
+                }`}
+              >
+                {email.length > 0 && !emailOk
+                  ? "Skriv en gyldig e-mailadresse."
+                  : "Hvis du skriver din e-mail, sender vi statusopdateringer om ordren."}
               </span>
             </label>
 
