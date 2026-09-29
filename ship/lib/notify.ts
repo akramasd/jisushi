@@ -18,7 +18,7 @@ import { record, describeError } from '@/lib/monitor'
  */
 
 type OrderPayload = {
-  orderNo: number
+  orderNo: number | string
   customerName: string
   customerPhone: string
   total: number

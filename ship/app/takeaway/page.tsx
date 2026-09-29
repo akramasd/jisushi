@@ -42,8 +42,8 @@ export default async function TakeawayPage() {
     dbError = true
   }
 
-  // The owner's manual pause. Read server-side with the service role, because
-  // anon can select menu_items and nothing else.
+  // Read the owner's pause from the same V3 source of truth used by checkout.
+  // Keep this server-side so the page and the order transaction stay aligned.
   //
   // Shown BEFORE the menu rather than at checkout: letting someone build a cart
   // and then telling them at the last step is the most annoying possible way to
@@ -51,7 +51,7 @@ export default async function TakeawayPage() {
   let paused: { on: boolean; message: string | null } = { on: false, message: null }
   try {
     const { data: trading } = await serviceClient()
-      .from("settings")
+      .from("restaurant_settings")
       .select("ordering_paused,pause_message")
       .eq("id", "main")
       .maybeSingle()

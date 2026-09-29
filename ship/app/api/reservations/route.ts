@@ -147,6 +147,15 @@ export async function POST(req: Request) {
       reserved_at: string
     }
 
+    if (
+      !result?.ok ||
+      !result.reservation_no ||
+      !result.status ||
+      !result.reserved_at
+    ) {
+      throw new Error("create_web_reservation returned invalid result")
+    }
+
     return NextResponse.json({
       ok: true,
       replay: result.idempotent,

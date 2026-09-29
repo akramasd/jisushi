@@ -131,8 +131,8 @@ export default function BookingPage() {
 
             <p className="ji-body text-white/75 mt-6 leading-[1.8]">
               Vi har modtaget din bordreservation.
-              Du får en e-mail nu, og endnu en når
-              Ji Sushi har bekræftet reservationen.
+              Du får en e-mail som kvittering for modtagelsen.
+              Reservationen er først bekræftet, når Ji Sushi har godkendt den.
             </p>
 
             <button

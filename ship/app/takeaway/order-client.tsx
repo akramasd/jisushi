@@ -213,7 +213,10 @@ export default function OrderClient({
         <p className="ji-eyebrow text-white/70">Tak for din bestilling</p>
         <h2 className="ji-display text-[clamp(2rem,6vw,3.2rem)] mt-4">Ordre #{done.orderNo}</h2>
         <p className="ji-body text-[18px] text-white/75 mt-6 max-w-md mx-auto leading-[1.85]">
-          Du betaler {kr(done.total)} kr ved afhentning på {SITE.street}. Ji Sushi har nu op til 10 minutter til at bekræfte bestillingen.
+          Du betaler {kr(done.total)} kr ved afhentning på {SITE.street}.{" "}
+          {done.degraded
+            ? "Bestillingen er sendt via nødsporet. Ring venligst til Ji Sushi for at få den bekræftet."
+            : "Ji Sushi har nu op til 10 minutter til at bekræfte bestillingen."}
         </p>
 
         {done.token ? (

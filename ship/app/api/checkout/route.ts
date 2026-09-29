@@ -357,7 +357,7 @@ export async function POST(req: Request) {
 
     if (mirrored) {
       await notifyNewOrder({
-        orderNo: fallbackNo as unknown as number,
+        orderNo: fallbackNo,
         customerName: name,
         customerPhone: formatDanishPhone(phone),
         total: priced.total,
